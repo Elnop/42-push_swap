@@ -6,7 +6,7 @@
 /*   By: lperroti <lperroti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 07:51:07 by lperroti          #+#    #+#             */
-/*   Updated: 2023/01/17 12:15:03 by lperroti         ###   ########.fr       */
+/*   Updated: 2023/01/17 23:15:50 by lperroti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,23 +18,21 @@ bool	sort_handler(void *a, void *b)
 	return (*(int *)a <= *(int *)b);
 }
 
-bool	sort3(int *pile_a, int *pile_b)
+bool	sort3(int *pile_a, int *pile_b, int *pile_s)
 {
-	if (array_size(pile_a) == 3)
+	while (!array_issort(pile_a, &sort_handler))
 	{
-		if (!sort_handler(pile_a, pile_a + 1)
-			&& (
-				!sort_handler(pile_a + 1, pile_a + 2)
-				|| !sort_handler(pile_a + 2, pile_a)
-			)
-		)
+		if ((long)array_indexof(pile_s, pile_a)
+			- (long)array_indexof(pile_s, pile_a + 1) == 1)
 			do_op(pile_a, pile_b, SA);
-		else if (!sort_handler(pile_a + 1, pile_a + 2)
-			&& !sort_handler(pile_a + 2, pile_a))
-		{
+		if ((long)array_indexof(pile_s, pile_a + 1)
+			- (long)array_indexof(pile_s, pile_a + 2) == 1)
+			do_op(pile_a, pile_b, PB);
+		if ((long)array_indexof(pile_s, pile_a)
+			- (long)array_indexof(pile_s, pile_a + 2) == 1)
 			do_op(pile_a, pile_b, RA);
-			do_op(pile_a, pile_b, SA);
-		}
+		if (array_size(pile_a) != 3)
+			do_op(pile_a, pile_b, PA);
 	}
 	return (true);
 }
@@ -47,6 +45,8 @@ bool	pa_insert_sort(int *pile_a, int *pile_b, int *pile_sorted)
 	sorted_index = array_size(pile_sorted);
 	while (sorted_index--)
 	{
+		if (!array_has(pile_b, pile_sorted + sorted_index))
+			continue ;
 		pile_b_index = 0;
 		while (pile_b[pile_b_index] != pile_sorted[sorted_index])
 			pile_b_index++;
@@ -80,11 +80,11 @@ bool	pb_by_medianes(int *pile_a, int *pile_b, int *pile_s)
 	size_t	i;
 
 	mediane_index = 0;
-	while (array_size(pile_a))
+	while (array_size(pile_a) - 3)
 	{
 		mediane_index += array_size(pile_s) / 10;
-		if (!mediane_index || mediane_index > array_size(pile_s) - 1)
-			mediane_index = array_size(pile_s) - 1;
+		if (!mediane_index || mediane_index > array_size(pile_s) - 4)
+			mediane_index = array_size(pile_s) - 4;
 		mediane = pile_s[mediane_index];
 		i = 0;
 		while (i < array_size(pile_a))
@@ -110,18 +110,20 @@ bool	sort(int *pile_a, int *pile_b)
 {
 	int		*pile_sorted;
 
-	if (array_issort(pile_a, &sort_handler))
-		return (true);
+	if (array_size(pile_a) == 2 && !array_issort(pile_a, &sort_handler))
+		do_op(pile_a, pile_b, SA);
 	pile_sorted = array_sort(array_dup(pile_a), &sort_handler);
+	if (array_issort(pile_a, &sort_handler))
+		return (array_free(pile_sorted), true);
 	if (array_size(pile_a) == 3)
-		sort3(pile_a, pile_b);
+		sort3(pile_a, pile_b, pile_sorted);
 	else
 	{
 		if (!pb_by_medianes(pile_a, pile_b, pile_sorted))
-			return (false);
+			return (array_free(pile_sorted), false);
+		sort3(pile_a, pile_b, pile_sorted);
 		if (!pa_insert_sort(pile_a, pile_b, pile_sorted))
-			return (false);
+			return (array_free(pile_sorted), false);
 	}
-	array_free(pile_sorted);
-	return (true);
+	return (array_free(pile_sorted), true);
 }

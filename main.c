@@ -6,7 +6,7 @@
 /*   By: lperroti <lperroti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 05:21:02 by lperroti          #+#    #+#             */
-/*   Updated: 2023/01/17 08:45:35 by lperroti         ###   ########.fr       */
+/*   Updated: 2023/01/17 23:07:26 by lperroti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int	main(int ac, char **av)
 	t_array	pile_a;
 	t_array	pile_b;
 
-	if (ac < 2)
+	if (ac < 3)
 		return (1);
 	pile_a = (int *)strtab_to_intarray(av + 1, ac - 1);
 	pile_b = (int *)array_new(ac - 1, sizeof(int));
