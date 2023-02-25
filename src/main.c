@@ -6,11 +6,11 @@
 /*   By: lperroti <lperroti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 05:21:02 by lperroti          #+#    #+#             */
-/*   Updated: 2023/01/17 23:07:26 by lperroti         ###   ########.fr       */
+/*   Updated: 2023/02/25 21:38:06 by lperroti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/push_swap.h"
+#include "../includes/push_swap.h"
 
 bool	check_dup(int *pile_a)
 {

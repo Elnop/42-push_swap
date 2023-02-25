@@ -6,15 +6,14 @@
 /*   By: lperroti <lperroti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/04 21:12:42 by lperroti          #+#    #+#             */
-/*   Updated: 2023/01/11 12:01:22 by lperroti         ###   ########.fr       */
+/*   Updated: 2023/02/25 22:29:01 by lperroti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
 
-# include "liblp_c/liblp.h"
-# include "ops.h"
+# include "../libs/liblp_c/liblp.h"
 
 enum e_ops
 {
@@ -31,6 +30,10 @@ enum e_ops
 	RRR = 10,
 };
 
+void	swap(t_array pile);
+void	push(t_array src, t_array dest);
+void	rotate(t_array pile);
+void	rrotate(t_array pile);
 void	do_op(t_array pile_a, t_array pile_b, enum e_ops op);
 bool	sort(int *pile_a, int *pile_b);
 

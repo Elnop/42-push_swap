@@ -6,11 +6,11 @@
 /*   By: lperroti <lperroti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 21:30:22 by lperroti          #+#    #+#             */
-/*   Updated: 2023/01/16 14:23:08 by lperroti         ###   ########.fr       */
+/*   Updated: 2023/02/25 21:38:00 by lperroti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/push_swap.h"
+#include "../includes/push_swap.h"
 
 static void	print_op(enum e_ops op)
 {

@@ -6,12 +6,11 @@
 /*   By: lperroti <lperroti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 07:51:07 by lperroti          #+#    #+#             */
-/*   Updated: 2023/01/17 23:15:50 by lperroti         ###   ########.fr       */
+/*   Updated: 2023/02/25 23:28:55 by lperroti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/push_swap.h"
-#include <stdio.h>
+#include "../includes/push_swap.h"
 
 bool	sort_handler(void *a, void *b)
 {
@@ -90,15 +89,9 @@ bool	pb_by_medianes(int *pile_a, int *pile_b, int *pile_s)
 		while (i < array_size(pile_a))
 		{
 			if (pile_a[i] <= mediane)
-			{
 				pb_elem(pile_a, pile_b, i);
-				i = 0;
-			}
 			else if (i && pile_a[array_size(pile_a) - i] <= mediane)
-			{
 				pb_elem(pile_a, pile_b, array_size(pile_a) - i);
-				i = 0;
-			}
 			else
 				i++;
 		}

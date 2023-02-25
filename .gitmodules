@@ -1,0 +1,3 @@
+[submodule "libs/liblp_c"]
+	path = libs/liblp_c
+	url = https://github.com/Elnop/liblp_c
