@@ -6,7 +6,7 @@
 /*   By: lperroti <lperroti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/04 21:12:42 by lperroti          #+#    #+#             */
-/*   Updated: 2023/02/25 22:29:01 by lperroti         ###   ########.fr       */
+/*   Updated: 2023/02/26 00:41:20 by lperroti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,11 +30,13 @@ enum e_ops
 	RRR = 10,
 };
 
+bool	sort_handler(void *a, void *b);
 void	swap(t_array pile);
 void	push(t_array src, t_array dest);
 void	rotate(t_array pile);
 void	rrotate(t_array pile);
 void	do_op(t_array pile_a, t_array pile_b, enum e_ops op);
+bool	sort_3elems(int *pile_a, int *pile_b, int *pile_s);
 bool	sort(int *pile_a, int *pile_b);
 
 #endif

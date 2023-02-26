@@ -1,3 +1,9 @@
 [submodule "libs/liblp_c"]
 	path = libs/liblp_c
 	url = https://github.com/Elnop/liblp_c
+[submodule "push_swap_tester"]
+	path = push_swap_tester
+	url = git@github.com:louisabricot/push_swap_tester.git
+[submodule "push_swap_visualizer"]
+	path = push_swap_visualizer
+	url = git@github.com:o-reo/push_swap_visualizer.git

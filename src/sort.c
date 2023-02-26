@@ -6,35 +6,11 @@
 /*   By: lperroti <lperroti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 07:51:07 by lperroti          #+#    #+#             */
-/*   Updated: 2023/02/25 23:28:55 by lperroti         ###   ########.fr       */
+/*   Updated: 2023/02/26 04:27:35 by lperroti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
-
-bool	sort_handler(void *a, void *b)
-{
-	return (*(int *)a <= *(int *)b);
-}
-
-bool	sort3(int *pile_a, int *pile_b, int *pile_s)
-{
-	while (!array_issort(pile_a, &sort_handler))
-	{
-		if ((long)array_indexof(pile_s, pile_a)
-			- (long)array_indexof(pile_s, pile_a + 1) == 1)
-			do_op(pile_a, pile_b, SA);
-		if ((long)array_indexof(pile_s, pile_a + 1)
-			- (long)array_indexof(pile_s, pile_a + 2) == 1)
-			do_op(pile_a, pile_b, PB);
-		if ((long)array_indexof(pile_s, pile_a)
-			- (long)array_indexof(pile_s, pile_a + 2) == 1)
-			do_op(pile_a, pile_b, RA);
-		if (array_size(pile_a) != 3)
-			do_op(pile_a, pile_b, PA);
-	}
-	return (true);
-}
 
 bool	pa_insert_sort(int *pile_a, int *pile_b, int *pile_sorted)
 {
@@ -89,9 +65,15 @@ bool	pb_by_medianes(int *pile_a, int *pile_b, int *pile_s)
 		while (i < array_size(pile_a))
 		{
 			if (pile_a[i] <= mediane)
+			{
 				pb_elem(pile_a, pile_b, i);
+				i = 0;
+			}
 			else if (i && pile_a[array_size(pile_a) - i] <= mediane)
+			{
 				pb_elem(pile_a, pile_b, array_size(pile_a) - i);
+				i = 0;
+			}
 			else
 				i++;
 		}
@@ -109,12 +91,12 @@ bool	sort(int *pile_a, int *pile_b)
 	if (array_issort(pile_a, &sort_handler))
 		return (array_free(pile_sorted), true);
 	if (array_size(pile_a) == 3)
-		sort3(pile_a, pile_b, pile_sorted);
+		sort_3elems(pile_a, pile_b, pile_sorted);
 	else
 	{
 		if (!pb_by_medianes(pile_a, pile_b, pile_sorted))
 			return (array_free(pile_sorted), false);
-		sort3(pile_a, pile_b, pile_sorted);
+		sort_3elems(pile_a, pile_b, pile_sorted);
 		if (!pa_insert_sort(pile_a, pile_b, pile_sorted))
 			return (array_free(pile_sorted), false);
 	}
