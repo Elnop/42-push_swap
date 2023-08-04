@@ -1,4 +1,5 @@
 checker
 push_swap_result.log
 push_swap_run_args.log
-.vscode/
+.vscode
+.obj

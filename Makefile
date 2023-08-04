@@ -14,7 +14,7 @@ SRCS_DIR = src
 
 SRCS = $(addprefix $(SRCS_DIR)/, $(addsuffix .c, $(FILES)))
 
-OBJS_DIR = obj
+OBJS_DIR = .obj
 
 OBJS = $(addprefix $(OBJS_DIR)/, $(addsuffix .o, $(FILES)))
 
@@ -28,7 +28,7 @@ LIBS_DIR = libs
 
 LIBLP_DIR = $(LIBS_DIR)/liblp_c
 
-LIBLP = $(LIBLP_DIR)/liblp.a
+LIBLP = $(LIBLP_DIR)/liblp_c.a
 
 $(NAME): $(LIBLP) $(OBJS_DIR) $(OBJS)
 	$(CC) $(OBJS) $(LIBLP) -o $(NAME)
